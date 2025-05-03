@@ -1,39 +1,65 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Hamburger Menu Toggle
-    const hamburger = document.getElementById("hamburger");
-    const navLinks = document.querySelector(".nav-links");
+// Hamburger Menu Toggle
+const hamburger = document.getElementById("hamburger");
+const navLinks = document.querySelector(".nav-links");
 
-    hamburger.addEventListener("click", function () {
-        navLinks.classList.toggle("nav-active");
-        this.classList.toggle("active");
+hamburger.addEventListener("click", function () {
+    navLinks.classList.toggle("nav-active");
+    this.classList.toggle("active");
+});
+
+// Dropdown Menu Logic
+const otherMenu = document.getElementById("other-menu");
+const dropdownList = document.getElementById("dropdownList");
+
+const dietMenu = document.getElementById("diet-menu");
+const dietDropdown = document.getElementById("dietDropdown");
+
+// Toggle Other Dropdown
+otherMenu.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    dropdownList.classList.toggle("show-dropdown");
+    dietDropdown.classList.remove("show-dropdown");
+});
+
+// Toggle Diet Dropdown
+dietMenu.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    dietDropdown.classList.toggle("show-dropdown");
+    dropdownList.classList.remove("show-dropdown");
+});
+
+// Close dropdowns when clicking outside
+document.addEventListener("click", function (event) {
+    if (!dropdownList.contains(event.target) && !otherMenu.contains(event.target)) {
+        dropdownList.classList.remove("show-dropdown");
+    }
+    if (!dietDropdown.contains(event.target) && !dietMenu.contains(event.target)) {
+        dietDropdown.classList.remove("show-dropdown");
+    }
+});
+
+// ✅ Close dropdowns when a link inside them is clicked (MOBILE FIX)
+const dropdownLinks = document.querySelectorAll("#dropdownList a, #dietDropdown a");
+dropdownLinks.forEach(link => {
+    link.addEventListener("click", () => {
+        dropdownList.classList.remove("show-dropdown");
+        dietDropdown.classList.remove("show-dropdown");
+        navLinks.classList.remove("nav-active"); // optional: close the mobile menu too
+        hamburger.classList.remove("active");    // optional: deactivate hamburger icon
     });
+});
 
-    // Dropdown Menu Logic
-    const otherMenu = document.getElementById("other-menu");
-    const dropdownList = document.getElementById("dropdownList");
+// Auto-close mobile menu when a nav link is clicked
+const navLinksList = document.querySelectorAll(".nav-links a");
 
-    const dietMenu = document.getElementById("diet-menu");
-    const dietDropdown = document.getElementById("dietDropdown");
-
-    otherMenu.addEventListener("click", function (e) {
-        e.preventDefault();
-        dropdownList.classList.toggle("show-dropdown");
+navLinksList.forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("nav-active"); // close the nav
+        hamburger.classList.remove("active");    // remove hamburger animation
     });
-
-    dietMenu.addEventListener("click", function (e) {
-        e.preventDefault();
-        dietDropdown.classList.toggle("show-dropdown");
-    });
-
-    // Close dropdowns when clicking outside
-    document.addEventListener("click", function (event) {
-        if (!otherMenu.contains(event.target) && !dropdownList.contains(event.target)) {
-            dropdownList.classList.remove("show-dropdown");
-        }
-        if (!dietMenu.contains(event.target) && !dietDropdown.contains(event.target)) {
-            dietDropdown.classList.remove("show-dropdown");
-        }
-    });
+});
 
     // Smooth Scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -66,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.addEventListener("scroll", checkScroll);
     checkScroll(); // Initial check when the page loads
-});
+;
 
 // Hero Button Click Action
 function startNow() {
@@ -128,3 +154,5 @@ window.addEventListener("scroll", function () {
         navbar.classList.remove("scrolled");
     }
 });
+
+  
