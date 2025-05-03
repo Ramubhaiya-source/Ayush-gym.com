@@ -7,11 +7,16 @@
     background: rgb(0, 0, 0); /* White background */
 }
 
+
 ::-webkit-scrollbar-thumb {
     background: red; /* Red scrollbar */
     border-radius: 5px;
 }
-
+html {
+    scroll-behavior: smooth;
+    
+  }
+  
 ::-webkit-scrollbar-thumb:hover {
     background: red; /* Darker red on hover */
 }
@@ -246,12 +251,13 @@ nav ul li a:hover {
 
 
 /* hero */
+
 /* Hero Section */
 .hero {
     position: relative;
     width: 100%;
     min-height: 100vh; /* Full screen height */
-    background: url('workout.jpg') no-repeat center center;
+    background: url('images/workout.jpg') no-repeat center center;
     background-size: cover; /* Cover entire section */
     background-attachment: fixed; /* Optional: Parallax effect */
     display: flex;
@@ -1127,3 +1133,39 @@ h3 {
         flex-direction: column; /* Stack items vertically */
     }
 }
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+  }
+  
+  .modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less depending on screen size */
+  }
+  
+  .close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close-btn:hover,
+  .close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
